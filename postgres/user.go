@@ -2,7 +2,7 @@ package postgres
 
 import (
 	"github.com/bradleyshawkins/rent-user/identity"
-	uuid "github.com/satori/go.uuid"
+	"github.com/google/uuid"
 )
 
 // SignUp provides a transaction around the sign up process
@@ -29,13 +29,13 @@ func (d *Database) SignUp(suf *identity.SignUpForm) error {
 }
 
 func (t *transaction) RegisterUser(user *identity.User, c *identity.Credentials) error {
-	detailsID := uuid.NewV4()
+	detailsID := uuid.New()
 	_, err := t.tx.Exec(`INSERT INTO app_user_details(id, first_name, last_name, email_address) VALUES ($1, $2, $3, $4)`, detailsID, user.FirstName, user.LastName, user.EmailAddress.Address)
 	if err != nil {
 		return toRentError(err)
 	}
 
-	credentialsID := uuid.NewV4()
+	credentialsID := uuid.New()
 	_, err = t.tx.Exec(`INSERT INTO app_user_credentials(id, username, password) VALUES ($1, $2, $3)`, credentialsID, c.Username, c.Password)
 	if err != nil {
 		return toRentError(err)

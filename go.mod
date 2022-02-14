@@ -11,7 +11,6 @@ require (
 	github.com/kelseyhightower/envconfig v1.4.0
 	github.com/lib/pq v1.10.4
 	github.com/matryer/is v1.4.0
-	github.com/satori/go.uuid v1.2.0
 	golang.org/x/crypto v0.0.0-20220213190939-1e6e3497d506
 )
 
