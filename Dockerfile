@@ -1,6 +1,6 @@
 FROM golang:1.16.3 AS build
 ADD . /src/
-WORKDIR /src/cmd/rent-user
+WORKDIR /src
 RUN GOOS=linux GOARCH=amd64 go build -o rent-user
 
 
@@ -16,7 +16,6 @@ RUN apk add --no-cache \
 
 WORKDIR /app
 EXPOSE 8080
-ADD postgres/schema /app/schema
-COPY --from=build /src/cmd/rent-user/rent-user /app/
+COPY --from=build /src/rent-user /app/
 HEALTHCHECK CMD wget http://localhost:8080/health || exit 1
 ENTRYPOINT ./rent-user

@@ -1,13 +1,13 @@
 version: '3.6'
 services:
-  postgres:
+  rent-user-postgres:
     image: postgres:13.2
     restart: always
     ports:
       - 5432:5432
     environment:
       POSTGRES_PASSWORD: 'password'
-      POSTGRES_DB: 'rent'
+      POSTGRES_DB: 'rent-user'
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U postgres" ]
       interval: 5s
